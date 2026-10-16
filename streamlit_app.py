@@ -1,6 +1,18 @@
+import subprocess
+import sys
+
+# Auto-instalar dependencias si faltan (evita problemas con requirements.txt)
+try:
+    import joblib
+    import sklearn
+    import pandas
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "joblib", "scikit-learn", "pandas", "pyarrow"])
+    import joblib
+    import sklearn
+    import pandas
+
 import streamlit as st
-import joblib
-import pandas as pd
 
 st.title("CREDITSCORE-AGENT 💳")
 st.write("Agente Inteligente de Scoring Crediticio")
@@ -10,29 +22,35 @@ st.write("Agente Inteligente de Scoring Crediticio")
 def cargar_modelo():
     return joblib.load('creditscore_model.pkl')
 
-model = cargar_modelo()
+try:
+    model = cargar_modelo()
+    modelo_cargado = True
+except Exception as e:
+    modelo_cargado = False
+    st.error(f"No se pudo cargar el archivo del modelo (.pkl): {e}")
 
-# Formulario de entrada de datos en la interfaz
-loan_amnt = st.number_input("Monto del Préstamo ($)", value=10000.0)
-annual_inc = st.number_input("Ingresos Anuales ($)", value=50000.0)
-fico_range_low = st.number_input("Puntaje FICO", value=700.0)
-dti = st.number_input("Ratio de Endeudamiento (DTI)", value=15.0)
-historial_delitos = st.checkbox("¿Tiene antecedentes/historial delictivo (AML)?")
+if modelo_cargado:
+    # Formulario de entrada de datos en la interfaz
+    loan_amnt = st.number_input("Monto del Préstamo ($)", value=10000.0)
+    annual_inc = st.number_input("Ingresos Anuales ($)", value=50000.0)
+    fico_range_low = st.number_input("Puntaje FICO", value=700.0)
+    dti = st.number_input("Ratio de Endeudamiento (DTI)", value=15.0)
+    historial_delitos = st.checkbox("¿Tiene antecedentes/historial delictivo (AML)?")
 
-if st.button("Evaluar Crédito"):
-    if historial_delitos:
-        accion = "DERIVAR_ANALISTA"
-        prob_mora = 1.00
-    else:
-        features = [[loan_amnt, annual_inc, fico_range_low, dti]]
-        prob_mora = float(model.predict_proba(features)[0][1])
-        
-        if prob_mora <= 0.30 and fico_range_low >= 680:
-            accion = "APROBAR_CREDITO"
-        elif prob_mora > 0.60:
-            accion = "RECHAZAR_CREDITO"
-        else:
+    if st.button("Evaluar Crédito"):
+        if historial_delitos:
             accion = "DERIVAR_ANALISTA"
+            prob_mora = 1.00
+        else:
+            features = [[loan_amnt, annual_inc, fico_range_low, dti]]
+            prob_mora = float(model.predict_proba(features)[0][1])
             
-    st.subheader(f"Resultado: {accion}")
-    st.write(f"**Probabilidad de Mora Calculada:** {prob_mora:.4f}")
+            if prob_mora <= 0.30 and fico_range_low >= 680:
+                accion = "APROBAR_CREDITO"
+            elif prob_mora > 0.60:
+                accion = "RECHAZAR_CREDITO"
+            else:
+                accion = "DERIVAR_ANALISTA"
+                
+        st.subheader(f"Resultado: {accion}")
+        st.write(f"**Probabilidad de Mora Calculada:** {prob_mora:.4f}")
