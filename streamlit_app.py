@@ -34,5 +34,5 @@ if st.button("Evaluar Crédito"):
         else:
             accion = "DERIVAR_ANALISTA"
             
-    st.subheader(外 f"Resultado: {accion}")
+    st.subheader(f"Resultado: {accion}")
     st.write(f"**Probabilidad de Mora Calculada:** {prob_mora:.4f}")
