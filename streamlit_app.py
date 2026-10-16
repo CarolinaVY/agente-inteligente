@@ -26,7 +26,7 @@ if modelo_cargado:
     annual_inc = st.number_input("Ingresos Anuales ($)", value=60000.0, min_value=0.0)
     
     st.markdown("---")
-    st.write("### Variables para Cálculo Automático (DTI y FICO)")
+    st.write("###  DTI y FICO")
     
     pagos_mensuales_deudas = st.number_input("Pagos mensuales actuales de otras deudas ($)", value=500.0, min_value=0.0)
     retrasos_previos = st.selectbox("¿Tiene historial de pagos atrasados?", ["No", "Sí, ocasionales", "Sí, graves/recurrentes"])
