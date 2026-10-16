@@ -28,7 +28,7 @@ if modelo_cargado:
     
     # Nuevos campos para calcular el DTI automáticamente
     st.markdown("---")
-    st.write("###Ratio de Endeudamiento (DTI)")
+    st.write("### Ratio de Endeudamiento (DTI)")
     pagos_mensuales_deudas = st.number_input("Pagos mensuales actuales de otras deudas ($)", value=500.0, min_value=0.0)
     
     # Cálculo automático del DTI (Debt-to-Income Ratio) mensual
