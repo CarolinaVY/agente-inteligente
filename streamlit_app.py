@@ -1,18 +1,7 @@
-import subprocess
-import sys
-
-# Auto-instalar dependencias si faltan (evita problemas con requirements.txt)
-try:
-    import joblib
-    import sklearn
-    import pandas
-except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "joblib", "scikit-learn", "pandas", "pyarrow"])
-    import joblib
-    import sklearn
-    import pandas
-
 import streamlit as st
+import joblib
+import pandas as pd
+import sklearn
 
 st.title("CREDITSCORE-AGENT 💳")
 st.write("Agente Inteligente de Scoring Crediticio")
