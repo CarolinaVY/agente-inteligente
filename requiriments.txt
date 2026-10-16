@@ -1,7 +1,4 @@
 streamlit
-fastapi
-uvicorn
 scikit-learn
-pydantic
 joblib
 pandas
