@@ -26,17 +26,21 @@ if modelo_cargado:
     annual_inc = st.number_input("Ingresos Anuales ($)", value=60000.0, min_value=0.0)
     
     st.markdown("---")
-    st.write("###  DTI y FICO")
+    st.write("### Variables para Cálculo Automático (DTI y FICO)")
     
     pagos_mensuales_deudas = st.number_input("Pagos mensuales actuales de otras deudas ($)", value=500.0, min_value=0.0)
-    retrasos_previos = st.selectbox("¿Tiene historial de pagos atrasados?", ["No", "Sí, ocasionales", "Sí, graves/recurrentes"])
+    
+    # ¡AQUÍ ESTÁ EL CAMPO QUE FALTABA EN LA INTERFAZ!
+    retrasos_previos = st.selectbox(
+        "Historial de pagos atrasados", 
+        ["No", "Sí, ocasionales", "Sí, graves/recurrentes"]
+    )
     
     # 1. Cálculo automático del DTI
     ingreso_mensual = annual_inc / 12.0 if annual_inc > 0 else 1.0
     dti = (pagos_mensuales_deudas / ingreso_mensual) * 100.0
     
     # 2. Cálculo automático del Puntaje FICO estimado (Rango: 300 - 850)
-    # Base inicial ideal: 750 puntos
     fico_base = 750
     
     # Penalización por DTI alto
@@ -53,10 +57,10 @@ if modelo_cargado:
     elif retrasos_previos == "Sí, graves/recurrentes":
         fico_base -= 180
         
-    # Asegurar que esté dentro de los límites reales de FICO (300 a 850)
+    # Asegurar límites reales de FICO (300 a 850)
     fico_range_low = float(max(300, min(850, fico_base)))
     
-    # Mostrar los resultados calculados en tiempo real
+    # Mostrar métricas calculadas en tiempo real
     st.info(f"💡 **DTI Calculado:** {dti:.2f}%  |  💡 **Puntaje FICO Estimado:** {int(fico_range_low)}")
 
     historial_delitos = st.checkbox("¿Tiene antecedentes / historial delictivo (AML)?")
