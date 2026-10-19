@@ -13,7 +13,7 @@ Sistema inteligente híbrido para la evaluación automática de riesgo creditici
 ---
 
 ## 🚀 Enlaces de Acceso
-* **Plataforma en Producción (Streamlit Cloud):** [https://creditscore-agent.streamlit.app](https://creditscore-agent.streamlit.app)
+* **Plataforma en Producción (Streamlit Cloud):** [https://agente-inteligente-fudvw83mcewfjvg6cfqtpy.streamlit.app/](https://agente-inteligente-fudvw83mcewfjvg6cfqtpy.streamlit.app/)
 * **Documentación Académica:** Sección 9 - Desarrollo del Agente 
 
 ---
