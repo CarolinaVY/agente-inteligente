@@ -14,14 +14,14 @@ Sistema inteligente híbrido para la evaluación automática de riesgo creditici
 
 ## 🚀 Enlaces de Acceso
 * **Plataforma en Producción (Streamlit Cloud):** [https://creditscore-agent.streamlit.app](https://creditscore-agent.streamlit.app)
-* **Documentación Académica:** Sección 9 - Desarrollo del Agente (Fase 1-3)
+* **Documentación Académica:** Sección 9 - Desarrollo del Agente 
 
 ---
 
 ## 📊 Resumen de Rendimiento y Métricas (Fase 3)
 El agente ha sido validado bajo estrictos estándares operativos y predictivos:
-* **Capacidad Discriminativa (AUC-ROC):** **0.882** (Evaluado sobre un conjunto de test de $N = 5,000$ registros).
-* **Tiempo de Inferencia Operativo:** **$\sim 0.017\text{ segundos}$** por solicitud en promedio.
+* **Capacidad Discriminativa (AUC-ROC):** **0.645** (Evaluado sobre un conjunto de test de $N = 5,000$ registros).
+* **Tiempo de Inferencia Operativo:** **$\sim 0.014\text{ segundos}$** por solicitud en promedio.
 * **Tasa de Automatización Segura:** **$20.0\%$** de decisiones directas bajo umbrales optimizados de riesgo.
 * **Gobernanza AML:** **$100\%$ de efectividad** en el bloqueo y derivación analítica ante alertas restrictivas activas.
 
