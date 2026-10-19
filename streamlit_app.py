@@ -6,7 +6,7 @@ import os
 from datetime import datetime
 
 st.title("CREDITSCORE-AGENT 💳")
-st.write("Agente Inteligente para Scoring Crediticio y Gestión de Riesgo (Fase 2 & 3)")
+st.write("Agente Inteligente para Scoring Crediticio y Gestión de Riesgo")
 
 # Cargar el modelo entrenado
 @st.cache_resource
@@ -99,8 +99,8 @@ if modelo_cargado:
         st.success("✅ Ejecución registrada en el Log operativo (log_ejecucion.csv)")
         
     # Mostrar el log acumulado en pantalla
-    if os.path.exists("log_ejecucion.csv"):
-        st.markdown("---")
-        st.subheader("📜 Bitácora de Registros (Log de Ejecución)")
-        df_historico = pd.read_csv("log_ejecucion.csv")
-        st.dataframe(df_historico.tail(10))
+     #if os.path.exists("log_ejecucion.csv"):
+        #st.markdown("---")
+        #st.subheader("📜 Bitácora de Registros (Log de Ejecución)")
+        #df_historico = pd.read_csv("log_ejecucion.csv")
+        #st.dataframe(df_historico.tail(10))
